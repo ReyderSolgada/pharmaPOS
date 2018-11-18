@@ -14,23 +14,20 @@
 				<div class="modal-body">
 
 						<div class="form-group row align-items-center">
-							<label class="form-control-label col-lg-2 text-lg-right" for="txtaddnombres">Nombres:</label>
+							<label class="form-control-label col-lg-2 text-lg-right" for="txtaddnombres">Primer nombre:</label>
 							<div class="col-lg-12">
-								<input type="text" class="form-control" placeholder="Nombres" name="txtnombres" id="id-add-nombres">
+								<input type="text" class="form-control" placeholder="Nombres" name="txtnombres" id="d-add-nombre">
 							</div>
 						</div>
 					
 					<div class="row">
 						<div class="col-lg-6">						
-							<label class="form-control-label" for="">Ap. Paterno:</label>							
-							<input type="text" class="form-control"	placeholder="Ap. Paterno" name="txtaddappaterno" id="id-add-appaterno">
+							<label class="form-control-label" for="">Segundo nombre:</label>							
+							<input type="text" class="form-control"	placeholder="Segundo nombre" name="txtaddappaterno" id="id-add-segnombre">
 							
-
-							<label class="form-control-label"	for="">Ap. Materno:</label>							
-							<input type="text" class="form-control"	placeholder="Ap. Materno" name="txtaddapmaterno"	id="id-add-apmaterno">
+							<label class="form-control-label"	for="">Appelido</label>							
+							<input type="text" class="form-control"	placeholder="Apellido" name="txtaddapmaterno"	id="id-add-apellido">
 					
-
-
 							<label class="form-control-label" for="">Sexo:</label>							
 							<select id="id-add-cmbsexo" name="cmbasexo" class="form-control">
 								<option value="M">Masculino</option>
@@ -38,10 +35,11 @@
 
 							</select>
 							
-							<label class="form-control-label"	for="">Dni:</label>							
-							<input type="text" class="form-control"	placeholder="Dni" name="txtDni"	id="id-add-Dni">
-					
+							<label class="form-control-label"	for="">Ruc:</label>							
+							<input type="text" class="form-control"	placeholder="RUC" name="txtRuc"	id="id-add-ruc">
 							
+							<label class="form-control-label"	for="">Dni:</label>							
+							<input type="text" class="form-control"	placeholder="DNI" name="txtDni"	id="id-add-dni">
 							
 						</div>
 						<div class="col-md-6">
@@ -55,16 +53,9 @@
 								<option value="">Chorrillos</option>
 								<option value="">Miraflores</option>
 							</select>		
-									
-							<label class="form-control-label" for="">Dia de Registro:</label>							
-							<input type="text" class="form-control dp-fecha" placeholder="yyyy-mm-dd" name="txtaddfechareg" id="id-edit-fechareg" readonly="readonly" >
 							
-									
-					
 						</div>
 					</div>
-
-					
 
 				</div>
 				<!--END Modal Body-->

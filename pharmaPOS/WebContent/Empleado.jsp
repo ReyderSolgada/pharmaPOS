@@ -25,7 +25,7 @@
           <div class="container">
             <div class="page-header">
               <h1 class="page-title">
-                Mantenimiento Empleado
+                Empleado
               </h1>
              
             </div>
