@@ -110,7 +110,7 @@
                   <div class="card-header">
                     <h3 class="card-title">Listado de Productos</h3>
                     <div class="input-group col-lg-9">
-                            <input type="text" class="form-control" placeholder="Buscar por nombre" onkeyup="" id="txtfiltrarpro">
+                            <input type="text" class="form-control" placeholder="Buscar por nombre" onkeyup="buscarProductos()" id="filtra-prod-id">
                             <span class="input-group-btn">
                                 <button class="btn btn-secondary" >Buscar</button>
                             </span>

@@ -321,6 +321,70 @@ cargarCombos=function(cmbDist,cmbCargo){
 
 };
 
+function buscarEmpleados(){
+	var name=$('#filtra-emp-id').val().trim();
+	$.ajax({
+		url: 'http://localhost:8090/api/EmployeeSearch/'+name,
+		type: 'GET',
+//		data: "EmployeeList",
+		datatype: 'json',
+		success: function(datos) {
+			if(datos != ''){
+				limpiarTabla();
+				var tbody='';
+				for(var i=0; i<datos.length; i++){
+					var employeeId 	= datos[i].employeeId;
+					var firstName 	= datos[i].firstName;
+					var middleName	= datos[i].middleName;
+					var lastName	= datos[i].lastName;
+					var fecContr	= datos[i].hireDate;
+					var dni			= datos[i].dni;
+					var sex			= datos[i].sex;
+					var fono		= datos[i].phone;
+					var address		= datos[i].address;
+					var nomDist		= datos[i].districtEmployee.name;
+					var coddis 		= datos[i].districtEmployee.districtId;
+					var salary		= datos[i].salary;
+					var nomCargo	= datos[i].jobTitleEmployee.name;
+					var codcargo 	= datos[i].jobTitleEmployee.jobTitleId;
+
+					//param: alamacenará todos los campos de la entidad Employee separados por una coma, ya que estos son parámetros 
+					//que se utilizará abajo en el botón editar.
+					var param		=employeeId+"\',\'"+firstName+"\',\'"+middleName+"\',\'"+lastName+"\',\'"+
+									 fecContr+"\',\'"+dni+"\',\'"+sex+"\',\'"+fono+"\',\'"+address+"\',\'"+salary+"\',\'"+coddis+"\',\'"+codcargo;
+					
+					tbody+='<tr>';
+					tbody+='<td><span class="text-muted">'+employeeId+'</span></td>';
+					tbody+='<td>'+firstName+' '+middleName+' '+lastName +'</td>';
+					tbody+='<td>'+fecContr+'</td>';
+					tbody+='<td>'+dni+'</td>';
+					tbody+='<td>'+sex+'</td>';
+					tbody+='<td>'+fono+'</td>';
+					tbody+='<td>'+address+'</td>';
+					tbody+='<td>'+salary+'</td>';
+					tbody+='<td>'+nomDist+'</td>';
+					tbody+='<td>'+nomCargo+'</td>';
+/*boton editar*/	tbody+="<td><a href='#' class='btn btn-success' data-toggle='modal' data-target='#fm-modal-edit-emp' onclick=\"seleccionEmpleado(\'"+param+"\')\">Editar</a></td>";
+/*boton eliminar*/	tbody+="<td><a href='#' class='btn btn-danger' data-toggle='modal' data-target='.bd-confirm-modal-sm' onclick=\"confirElimina(\'"+employeeId+"\',\'"+firstName+' '+middleName+"\')\">Eliminar</a></td>";
+					tbody+='</tr>';
+					//El btn editar hace la llamada desde el onclick a la función seleccionEmpleado(param) con los parámetros que se utilizarán para cargar los controles de editarEmpleado.jsp
+					//El btn eliminar llama a la función confirmElimina(employeeId,firstName+middleName) se envia el id y el nombre, este último campo será para informar al usuario que el emnpleado va a ser borrado
+					//este valor se cargará en eliminarEmpleado.jsp
+				}
+				//console.log(tbody);
+				$('#tblempleados tbody').append(tbody);
+			}
+		},
+				 error: function(result){
+                    console.log('ERROR ' + result.status + ' ' + result.statusText);
+                }
+	}); 
+	
+	function limpiarTabla(){
+		$('#tblempleados tbody tr').remove();
+	}
+};
+
 //$('.dp-fecha').datetimepicker({
 //	language: "es",
 //	todayBtn: 1,

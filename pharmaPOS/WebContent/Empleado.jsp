@@ -109,7 +109,7 @@
                   <div class="card-header">
                     <h3 class="card-title">Listado de Empleados</h3>
                     <div class="input-group col-lg-9">
-                            <input type="text" class="form-control" placeholder="Buscar por nombres o apellidos" onkeyup="" id="txtfiltraremp">
+                            <input type="text" class="form-control" placeholder="Buscar por nombres o apellidos" onkeyup="buscarEmpleados()" id="filtra-emp-id">
                             <span class="input-group-btn">
                                 <button class="btn btn-secondary" >Buscar</button>
                             </span>

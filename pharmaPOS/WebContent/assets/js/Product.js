@@ -295,3 +295,59 @@ cargarCombosX=function(cmbCategoria,cmbProveedor,cmbLaboratorio){
 
 };
 
+function buscarProductos(){
+	var name=$('#filtra-prod-id').val().trim();
+	$.ajax({
+		url: 'http://localhost:8090/api/ProductSearch/'+name,
+		type: 'GET',
+		datatype: 'json',
+		success: function(datos) {
+			if(datos != ''){
+				limpiarTabla();
+				var tbody='';
+				for(var i=0; i<datos.length; i++){
+					var productId 	= datos[i].productId;
+					var productName = datos[i].description;
+					var price		= datos[i].price;
+					var stock		= datos[i].stock;
+					var codtippro	= datos[i].categoryProduct.categoryId;
+					var nomtippro	= datos[i].categoryProduct.name;
+					var codprov		= datos[i].supplierProduct.supplierId;
+					var nomprov 	= datos[i].supplierProduct.name;
+					var codlab		= datos[i].laboratoryProduct.laboratoryId;
+					var nomlab		= datos[i].laboratoryProduct.name;
+
+					var param		=productId+"\',\'"+
+									 productName+"\',\'"+
+									 price+"\',\'"+
+									 stock+"\',\'"+
+									 codtippro+"\',\'"+
+									 codprov+"\',\'"+
+									 codlab;
+					
+					tbody+='<tr>';
+					tbody+='<td><span class="text-muted">'+productId+'</span></td>';
+					tbody+='<td>'+productName+'</td>';
+					tbody+='<td>'+price+'</td>';
+					tbody+='<td>'+stock+'</td>';
+					tbody+='<td>'+nomtippro+'</td>';
+					tbody+='<td>'+nomprov+'</td>';
+					tbody+='<td>'+nomlab+'</td>';
+					tbody+="<td><a href='#' class='btn btn-success' data-toggle='modal' data-target='#fm-modal-edit-prod' onclick=\"seleccionProducto(\'"+param+"\')\">Editar</a></td>";
+					tbody+="<td><a href='#' class='btn btn-danger' data-toggle='modal' data-target='.bd-confirm-modal-sm' onclick=\"confirElimina(\'"+productId+"\',\'"+productName+"\')\">Eliminar</a></td>";
+					tbody+='</tr>';
+
+				}
+				$('#tblproductos tbody').append(tbody);
+			}
+		},
+				 error: function(result){
+                    console.log('ERROR ' + result.status + ' ' + result.statusText);
+                }
+	}); 
+	
+	function limpiarTabla(){
+		$('#tblproductos tbody tr').remove();
+	}
+};
+
