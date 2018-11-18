@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
+<%@page import="beans.Employee"%>
+
+<%
+	Employee empleado = null;
+	if(session.getAttribute("usuario") != null){
+		empleado = (Employee) session.getAttribute("usuario");
+	}else{
+		pageContext.forward("ServletInicioSesion?tipo=cerrarSesion");
+		
+	}
+
+%> 
+	
 	<div class="header py-4">
           <div class="container">
             <div class="d-flex">
@@ -43,7 +56,7 @@
                   <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
                     <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
                     <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">Camila Rivera</span>
+                      <span class="text-default"><%=empleado.getFirstName()+" "+empleado.getMiddleName()+" "+empleado.getLastName() %></span>
                       <small class="text-muted d-block mt-1">Administrator</small>
                     </span>
                   </a>
