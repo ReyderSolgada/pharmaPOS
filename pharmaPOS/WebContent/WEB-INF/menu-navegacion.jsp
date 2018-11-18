@@ -90,35 +90,31 @@
                     <a href="#" class="nav-link active"><i class="fe fe-home"></i> Inicio</a>
                   </li>
                   <li class="nav-item">
+                    <a href="./Cliente.jsp" class="nav-link"  id="link-nav-id-cli" ><i class="fa fa-handshake-o"></i> Clientes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./Empleado.jsp" class="nav-link"  id="link-nav-id-emp" ><i class="fa fa-male"></i> Empleados</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a href="./Producto.jsp" class="nav-link"><i class="fe fe-box"></i> Productos</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a href="./Proveedor.jsp" class="nav-link"><i class="fe fe-check-square"></i> Proveedor</a>
+                  </li>
+                  <li class="nav-item">
                     <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-box"></i> Ventas</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
                       <a href="#" class="dropdown-item ">Generar</a>
                       <a href="#" class="dropdown-item ">Consultar</a>
                     </div>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Clientes</a>
-                    <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="#" class="dropdown-item ">Afiliar</a>
-                      <a href="#" class="dropdown-item ">Consultar</a>
-                    </div>
-                  </li>
-                  <li class="nav-item">
-                    <a href="./Empleado.jsp" class="nav-link"  id="link-nav-id-emp" ><i class="fe fe-home"></i> Empleados</a>
-                  </li>
-                  <li class="nav-item dropdown">
+                   <li class="nav-item dropdown">
                     <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-file"></i> Reportes</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
                       <a href="#" class="dropdown-item ">Excel</a>
                       <a href="#" class="dropdown-item ">CVS</a>
                     </div>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a href="./Producto.jsp" class="nav-link"><i class="fe fe-check-square"></i> Productos</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a href="./Proveedor.jsp" class="nav-link"><i class="fe fe-check-square"></i> Proveedor</a>
-                  </li>
+                  </li>   
                 </ul>
               </div>
             </div>
