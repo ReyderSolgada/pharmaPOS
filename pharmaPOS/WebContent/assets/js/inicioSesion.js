@@ -9,17 +9,20 @@ if(email!=''& contra!=''){
 		type: 'GET',
 		datatype: 'json',
 		success: function(datos) {
-			if(datos!=''){	
+			if(datos!=null){	
 				enviarUsuarioServlet(JSON.stringify(datos));
 			}
 			else{
+				console.log('CONTRASEÑA INCORRECTA');
+				$('#alert-login').show();
+				$('#alert-login').html('<strong>Email y/o contraseña incorrectos.</strong>');
 				$.ambiance({
 				       message: 'Email y/o contraseña incorrectos.',
 				       title: "ERROR! ",
 				       type: "error"
 				    });
 			}
-				console.log('CONTRASEÑA INCORRECTA');
+				
 		},error: function(result){
                     console.log('ERROR ' + result.status + ' ' + result.statusText);
                 }

@@ -78,6 +78,8 @@
 									<button type="submit" class="btn btn-primary btn-block" onclick="inicioSesion()" >Iniciar
 										sesión</button>
 								</div>
+								<br>
+								<div class="alert alert-danger" id="alert-login" ></div>
 							</div>
 						<!-- </form> -->
 					</div>
