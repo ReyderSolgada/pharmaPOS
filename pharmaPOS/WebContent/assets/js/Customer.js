@@ -119,15 +119,15 @@ function agregarCliente() {
 
 function editarCliente() { 
 	
-	var codigo		=$('#id-add-codigo').val().trim();
-	var pri_nombre	=$('#id-add-nombre').val().trim();
-	var seg_nombre  =$('#id-add-segnombre').val().trim();
-	var apellido	=$('#id-add-apellido').val().trim();
-	var sexo 		=$('#id-add-cmbsexo').val();
-	var ruc			=$('#id-add-ruc').val().trim();
-	var dni			=$('#id-add-dni').val().trim();
-	var direccion	=$('#id-add-direccion').val().trim();
-	var codDistrito	=$('#id-add-cmbdistrito').val();
+	var codigo		=$('#id-edit-codigo').val().trim();
+	var pri_nombre	=$('#id-edit-nombre').val().trim();
+	var seg_nombre  =$('#id-edit-segnombre').val().trim();
+	var apellido	=$('#id-edit-apellido').val().trim();
+	var sexo 		=$('#id-edit-cmbsexo').val();
+	var ruc			=$('#id-edit-ruc').val().trim();
+	var dni			=$('#id-edit-dni').val().trim();
+	var direccion	=$('#id-edit-direccion').val().trim();
+	var codDistrito	=$('#id-edit-cmbdistrito').val();
 
 	var Customer = {
 		firstName:pri_nombre,

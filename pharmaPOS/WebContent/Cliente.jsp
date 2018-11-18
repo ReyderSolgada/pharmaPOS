@@ -11,7 +11,6 @@
 		pageContext.forward("ServletInicioSesion?tipo=cerrarSesion");
 		
 	}
-
 %> 
     <jsp:include page="WEB-INF/head.jsp">
     	<jsp:param  name="title" value="Cliente"/>
@@ -124,7 +123,7 @@
                           <th>Nombres y Apellidos</th>                          
                           <th>Sexo</th>
                           <th>RUC/DNI</th>
-                          <th>DirecciÃ³n</th>
+                          <th>Dirección</th>
                           <th>Distrito</th>
                           <th>RegisterDate</th>
                           <th colspan="2">Acciones</th>
