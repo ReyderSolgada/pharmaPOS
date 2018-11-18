@@ -9,7 +9,7 @@
  
  llenarTablaProveedores=function(){
 	$.ajax({
-		url: 'http://localhost:8090/api/suppliers',
+		url: 'http://localhost:8090/api/SupplierList',
 		type: 'GET',
 		datatype: 'json',
 		success: function(datos) {
@@ -75,7 +75,7 @@ function agregarProveedor(){
 	console.log(JSON.stringify(Supplier));				//Imprimir en consola el Array convertido a JSON (esto para Pruebas)
 	
 	$.ajax({
-		url:'http://localhost:8090/api/suppliers',	//URL que recibirá la data
+		url:'http://localhost:8090/api/SupplierAdd',	//URL que recibirá la data
 		type:'POST',									
 		contentType:'application/json; charset=utf-8',	
 		data:JSON.stringify(Supplier),					//Enviar la data convertido a JSON variable Employee
@@ -124,7 +124,7 @@ function editarProveedor(){								//Esta función hace lo mismo que el agregarE
 		console.log(JSON.stringify(Supplier));
 
 		$.ajax({
-		url:'http://localhost:8090/api/suppliers/'+id,			//URL: aquí se el agrega el parámetro id al final de la url
+		url:'http://localhost:8090/api/SupplierUpdate/'+id,			//URL: aquí se el agrega el parámetro id al final de la url
 		type:'PUT',													
 		contentType:'application/json; charset=utf-8',
 		data:JSON.stringify(Supplier),
@@ -161,7 +161,7 @@ function eliminarProveedor(){
 	var id 	= $('#id-del-Codigo').val();
 	
 	$.ajax({
-		url:'http://localhost:8090/api/suppliers/'+id,		//Agregamos el id al final de la URl
+		url:'http://localhost:8090/api/SupplierDelete/'+id,		//Agregamos el id al final de la URl
 		type:'DELETE',											//En este caso no enviamos ninguna data, con excepción del Id en la URL
 		datatype:'json',										//Pero sí vamos a recibir un Json como rspt
 
