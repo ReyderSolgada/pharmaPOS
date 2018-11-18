@@ -37,15 +37,11 @@
             </div>
             
             <div class="col-lg-4 mt-4 mt-lg-0">
-              Premium and Open Source dashboard template with responsive and high quality UI. For Free!
+             Open Source dashboard
             </div>
-
           </div>
-
         </div>
-
       </div>
-
       <footer class="footer">
         <div class="container">
           <div class="row align-items-center flex-row-reverse">
@@ -68,10 +64,5 @@
           </div>
         </div>
       </footer>
-      <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script src="assets/js/jquery.ambiance.js"></script> -->
-      <!-- <script src="assets/js/Employee.js"></script> -->
-      <!-- <script src="assets/js/Product.js"></script> -->
-	 <!--  <script src="assets/js/Supplier.js"></script> -->
   </body>
 </html>

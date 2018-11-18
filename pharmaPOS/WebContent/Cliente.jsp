@@ -13,7 +13,6 @@
 	}
 
 %> 
-
     <jsp:include page="WEB-INF/head.jsp">
     	<jsp:param  name="title" value="Cliente"/>
     </jsp:include>
@@ -26,11 +25,9 @@
           <div class="container">
             <div class="page-header">
               <h1 class="page-title">
-                Dashboard
+                Cliente
               </h1>
-              <input type="button" value="Listar" class="btn btn-primary" onclick="llenarTablaClientes()">
             </div>
-
             <div class="row row-cards">
               <div class="col-6 col-sm-4 col-lg-2">
                 <div class="card">
@@ -52,7 +49,7 @@
                       <i class="fe fe-chevron-down"></i>
                     </div>
                     <div class="h1 m-0">17</div>
-                    <div class="text-muted mb-4">Closed Today</div>
+                    <div class="text-muted mb-4">Cerradas hoy</div>
                   </div>
                 </div>
               </div>
@@ -64,7 +61,7 @@
                       <i class="fe fe-chevron-up"></i>
                     </div>
                     <div class="h1 m-0">7</div>
-                    <div class="text-muted mb-4">New Replies</div>
+                    <div class="text-muted mb-4">Productos nuevos</div>
                   </div>
                 </div>
               </div>
@@ -204,4 +201,5 @@
             </div>
           </div>
   
+  <script src="assets/js/Customer.js"></script>
      <jsp:include page="WEB-INF/footer.jsp"></jsp:include>

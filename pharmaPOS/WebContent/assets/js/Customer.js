@@ -1,196 +1,273 @@
-/**
- package com.api.pharmaPOS.entity;
+$(document).ready(function() {
+	llenarTablaClientes();
+});
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+llenarTablaClientes = function() {
+	
+	$.ajax({
+		url : 'http://localhost:8090/api/CustomerList',
+		type : 'GET',
+		datatype : 'json',
+		success : function(datos) {
+			if (datos != '') {
+				limpiarTabla();
+				var tbody = '';
+				for (var i = 0; i < datos.length; i++) {
+					var customerId = datos[i].customerId;
+					var primerNombre = datos[i].firstName;
+					var segundoNombre = datos[i].middleName;
+					var apellido = datos[i].lastName;
+					var sexo = datos[i].sex;
+					var ruc = datos[i].ruc;
+					var dni = datos[i].dni;
+					var direccion = datos[i].address;
+					var cod_distrito = datos[i].districtCustomer.districtId;
+					var nom_distrito = datos[i].districtCustomer.name;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonRootName;
+					var param = customerId + "\',\'" + primerNombre + "\',\'"
+					+ segundoNombre + "\',\'" + apellido + "\',\'"
+					+ sexo + "\',\'" + ruc + "\',\'" + dni + "\',\'" 
+					+ direccion + "\',\'" + cod_distrito;
 
-@Entity
-@Table(name = "Employee")
-//@JsonRootName(value="Employees")
-public class Employee implements Serializable {
-	private static final long serialVersionUID = -1689763166618120390L;
+					tbody+='<tr>';
+					tbody+='<td><span class="text-muted">'+customerId+'</span></td>';
+					tbody+='<td>'+primerNombre+' '+segundoNombre+' '+apellido +'</td>';
+					tbody+='<td>'+sexo+'</td>';
+					tbody+='<td>'+dni+'</td>';
+					tbody+='<td>'+sex+'</td>';
+					tbody+='<td>'+ruc+'</td>';
+					tbody+='<td>'+dni+'</td>';
+					tbody+='<td>'+direccion+'</td>';
+					tbody+='<td>'+nom_distrito+'</td>';
+					tbody+="<td><a href='#' class='btn btn-success' data-toggle='modal' data-target='#fm-modal-edit-emp' onclick=\"seleccionEmpleado(\'"+param+"\')\">Editar</a></td>";
+					tbody+="<td><a href='#' class='btn btn-danger' data-toggle='modal' data-target='.bd-confirm-modal-sm' onclick=\"confirElimina(\'"+customerId+"\',\'"+primerNombre+' '+segundoNombre+"\')\">Eliminar</a></td>";
+					tbody+='</tr>';
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "EmployeeId")
-	private int employeeId;
+				}
+				$('#tblclientes tbody').append(tbody);
+			}
+		},
+		error : function(result) {
+			console.log('ERROR ' + result.status + ' '
+				+ result.statusText);
+		}
+	});
 
-	@Column(name = "FirstName")
-	private String firstName;
-
-	@Column(name = "MiddleName")
-	private String middleName;
-
-	@Column(name = "LastName")
-	private String lastName;
-
-	@Column(name = "HireDate")
-	@Temporal(TemporalType.DATE)
-	private Date hireDate;
-
-	@Column(name = "DNI")
-	private String dni;
-
-	@Column(name = "Sex")
-	private String sex;
-
-	@Column(name = "Phone")
-	private String phone;
-
-	@Column(name = "Address")
-	private String address;
-
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "DistrictId")
-	private District DistrictEmployee;
-
-	@Column(name = "Salary")
-	private double salary;
-
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "JobTitleId")
-	private JobTitle JobTitleEmployee;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "EmployeeUser")
-	private List<User> listUser;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "EmployeeSalesOrder")
-	private List<SalesOrder> listSalesOrder;
-
-	public int getEmployeeId() {
-		return employeeId;
+	function limpiarTabla() {
+		$('#tblclientes tbody tr').remove();
 	}
+};
 
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public String getMiddleName() {
-		return middleName;
-	}
+function agregarCliente() {
+	var pri_nombre	=$('#id-add-nombre').val().trim();
+	var seg_nombre  =$('#id-add-segnombre').val().trim();
+	var apellido	=$('#id-add-apellido').val().trim();
+	var sexo 		=$('#id-add-cmbsexo').val();
+	var ruc			=$('#id-add-ruc').val().trim();
+	var dni			=$('#id-add-dni').val().trim();
+	var direccion	=$('#id-add-direccion').val().trim();
+	var codDistrito	=$('#id-add-cmbdistrito').val();
 
-	public String getLastName() {
-		return lastName;
-	}
+	var Customer = {
+		firstName:pri_nombre,
+		middleName:seg_nombre,
+		lastName:apellido,
+		sex:sexo,
+		ruc:ruc,
+		dni:dni,
+		address:direccion,
+		districtCustomer:{
+			districtId:codDistrito
+		}
+	};
 
-	public Date getHireDate() {
-		return hireDate;
-	}
+	console.log(JSON.stringify(Customer)); 
 
-	public String getDni() {
-		return dni;
-	}
+	$.ajax({
+		url : 'http://localhost:8090/api/CustomerAdd', 
+		type : 'POST',
+		contentType : 'application/json; charset=utf-8',
+		data : JSON.stringify(Customer), 
 
-	public String getSex() {
-		return sex;
-	}
+		success : function(response) { 
+			if (response.success != '') { 
+				$.ambiance({ 
+					message : response.success, 
+					title : "Éxito! ", 
+					type : "success"
+				});
+				llenarTablaClientes(); 
+				limpiarCampos('add');
+			} else if (response.error != '') { 
+				$.ambiance({ 
+					message : response.error,
+					title : "ERROR! ",
+					type : "error"
+				});
+			}
+		},
+		error : function(result) {
+			console.log('ERROR ' + result.status + ' ' + result.statusText); // esto
 
-	public String getPhone() {
-		return phone;
-	}
+		}
 
-	public String getAddress() {
-		return address;
-	}
+	});
 
-	public District getDistrictEmployee() {
-		return DistrictEmployee;
-	}
+};
 
-	public double getSalary() {
-		return salary;
-	}
 
-	public JobTitle getJobTitleEmployee() {
-		return JobTitleEmployee;
-	}
+function editarCliente() { 
+	
+	var codigo		=$('#id-add-codigo').val().trim();
+	var pri_nombre	=$('#id-add-nombre').val().trim();
+	var seg_nombre  =$('#id-add-segnombre').val().trim();
+	var apellido	=$('#id-add-apellido').val().trim();
+	var sexo 		=$('#id-add-cmbsexo').val();
+	var ruc			=$('#id-add-ruc').val().trim();
+	var dni			=$('#id-add-dni').val().trim();
+	var direccion	=$('#id-add-direccion').val().trim();
+	var codDistrito	=$('#id-add-cmbdistrito').val();
 
-	public List<User> getListUser() {
-		return listUser;
-	}
+	var Customer = {
+		firstName:pri_nombre,
+		middleName:seg_nombre,
+		lastName:apellido,
+		sex:sexo,
+		ruc:ruc,
+		dni:dni,
+		address:direccion,
+		districtCustomer:{
+			districtId:codDistrito
+		}
+	};
 
-	public List<SalesOrder> getListSalesOrder() {
-		return listSalesOrder;
-	}
+	console.log(JSON.stringify(Customer));
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
+	$.ajax({
+		url : 'http://localhost:8090/api/CustomerUpdate/' + id, 
+		type : 'PUT',
+		contentType : 'application/json; charset=utf-8',
+		data : JSON.stringify(Customer),
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+		success : function(response) {
+			if (response.success != '') {
+				$.ambiance({
+					message : response.success,
+					title : "Éxito! ",
+					type : "success"
+				});
+				llenarTablaProveedores();
+				limpiarCampos('edit');
+			} else if (response.error != '') {
+				$.ambiance({
+					message : response.error,
+					title : "ERROR! ",
+					type : "error"
+				});
+			}
+		},
+		error : function(result) {
+			console.log('ERROR ' + result.status + ' ' + result.statusText);
+		}
 
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
+	});
+}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+//  
 
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
-	}
+function eliminarCliente() {
+	var id = $('#id-del-Codigo').val();
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
+	$.ajax({
+		url : 'http://localhost:8090/api/CustomerDelete/' + id, 
+		type : 'DELETE', 
+		datatype : 'json', 
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+		success : function(response) {
+			if (response.success != '') {
+				$.ambiance({
+					message : response.success,
+					title : "Éxito! ",
+					type : "success"
+				});
+				llenarTablaProveedores();
+				$('#fm-modal-delete').modal('hide');
+			} else if (response.error != '') {
+				$.ambiance({
+					message : response.error,
+					title : "ERROR! ",
+					type : "error"
+				});
+				$('#fm-modal-delete').modal('hide');
+			}
+		},
+		error : function(result) {
+			console.log('ERROR ' + result.status + ' ' + result.statusText);
+		}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+	});
+}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+function limpiarCampos(tipo) { 
 
-	public void setDistrictEmployee(District districtEmployee) {
-		DistrictEmployee = districtEmployee;
-	}
+	$('#id-' + tipo + '-nombre').val(''); 
+	$('#id-' + tipo + '-segnombre').val(''); 
+	$('#id-' + tipo + '-apellido').val('');
+	$('#id-' + tipo + '-ruc').val('');
+	$('#id-' + tipo + '-dni').val('');
+	$('#id-' + tipo + '-cmbsexo option[value="M"]').attr('selected', true);
+	$('#id-' + tipo + '-direccion').val('');
+	$('#id-'+tipo+'-cmbdistrito option[value="1"]').attr('selected', true);
+}
 
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
 
-	public void setJobTitleEmployee(JobTitle jobTitleEmployee) {
-		JobTitleEmployee = jobTitleEmployee;
-	}
+function confirElimina(id, nombreCli) {
 
-	public void setListUser(List<User> listUser) {
-		this.listUser = listUser;
-	}
+	$('#id-del-Codigo').val(id); 
+	
+	var mensaje = '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+	+ '<span aria-hidden="true">&times;</span></button>'; 
+	$('.dialog-content').empty(); 
+	$('.dialog-content').html(
+		'<p>Está seguro de eliminar a <strong>' + nombreCli
+		+ '</strong> permanentemente?.</p>'); 
+}
 
-	public void setListSalesOrder(List<SalesOrder> listSalesOrder) {
-		this.listSalesOrder = listSalesOrder;
-	}
+function seleccionCliente(id, pri_nombre, seg_nombre, apellido, sexo, ruc, dni, direccion, codDistrito) {
+
+	cargarCombos('#id-edit-cmbdistrito');
+	
+	$('#id-edit-codigo').val(id);
+	$('#id-edit-nombre').val(nombre);
+	$('#id-edit-segnombre').val(apepater);
+	$('#id-edit-apellido').val(apemater);
+	$('#id-edit-cmbsexo option[value="'+sexo+'"]').attr('selected', true);
+	$('#id-edit-ruc').val(ruc);
+	$('#id-edit-dni').val(dni);
+	$('#id-edit-direccion').val(direcc);
+	$('#id-edit-cmbdistrito option[value="'+coddis+'"]').attr('selected', true);
 
 }
 
-  
- */
+
+cargarCombos=function(cmbDist){
+
+	$.ajax({
+		url:'http://localhost:8090/api/districts',
+		type:'GET',
+		datatype:'json',
+		success:function(response){
+			if(response !=''){			
+				$(cmbDist).empty();				
+				for(var i=0; i<=response.length;i ++){	
+					$(cmbDist).append('<option value="'+response[i].districtId+'">'+response[i].name+'</option>'); 
+
+				}
+			}
+			
+		}
+		
+	});
+	
+};
