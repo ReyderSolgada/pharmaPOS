@@ -11,8 +11,10 @@ llenarTablaClientes = function() {
 		success : function(datos) {
 			if (datos != '') {
 				limpiarTabla();
+				console.log(datos);
 				var tbody = '';
 				for (var i = 0; i < datos.length; i++) {
+					
 					var customerId = datos[i].customerId;
 					var primerNombre = datos[i].firstName;
 					var segundoNombre = datos[i].middleName;
@@ -23,7 +25,7 @@ llenarTablaClientes = function() {
 					var direccion = datos[i].address;
 					var cod_distrito = datos[i].districtCustomer.districtId;
 					var nom_distrito = datos[i].districtCustomer.name;
-
+					console.log(sexo);
 					var param = customerId + "\',\'" + primerNombre + "\',\'"
 					+ segundoNombre + "\',\'" + apellido + "\',\'"
 					+ sexo + "\',\'" + ruc + "\',\'" + dni + "\',\'" 
@@ -34,7 +36,7 @@ llenarTablaClientes = function() {
 					tbody+='<td>'+primerNombre+' '+segundoNombre+' '+apellido +'</td>';
 					tbody+='<td>'+sexo+'</td>';
 					tbody+='<td>'+dni+'</td>';
-					tbody+='<td>'+sex+'</td>';
+					tbody+='<td>'+sexo+'</td>';
 					tbody+='<td>'+ruc+'</td>';
 					tbody+='<td>'+dni+'</td>';
 					tbody+='<td>'+direccion+'</td>';

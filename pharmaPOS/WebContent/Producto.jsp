@@ -26,7 +26,7 @@
           <div class="container">
             <div class="page-header">
               <h1 class="page-title">
-                Mantenimiento de Productos
+                Productos
               </h1>
               
             </div>

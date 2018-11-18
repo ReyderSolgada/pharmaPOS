@@ -51,19 +51,19 @@
 				<div class="row">
 					<div class="col col-login mx-auto">
 						<div class="text-center mb-6">
-							<img src="./demo/brand/tabler.svg" class="h-6" alt="">
+							<img src="./demo/brand/pharma.png" class="h-6" alt="">
 						</div>
 						<!-- <form class="card" action="" method=""> -->
 							<div class="card-body p-6">
 								<div class="card-title">Ingresar</div>
 								<div class="form-group">
-									<label class="form-label" id="email">Email</label> <input type="text"
+									<label class="form-label" id="email">Email</label> <input type="email"
 										class="form-control" id="email-id"
 										aria-describedby="emailHelp" placeholder="Email">
 								</div>
 								<div class="form-group">
 									<label class="form-label" id=""> Contraseña <a
-										href="./forgot-password.html" class="float-right small">Olvidé
+										href="#" class="float-right small">Olvidé
 											mi contraseña</a>
 									</label> <input type="password" class="form-control"
 										id="password-id" placeholder="Contraseña">
