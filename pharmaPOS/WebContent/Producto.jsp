@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@page import="beans.Employee"%>
+
+<%
+	Employee empleado = null;
+	if(session.getAttribute("usuario") != null){
+		empleado = (Employee) session.getAttribute("usuario");
+	}else{
+		pageContext.forward("ServletInicioSesion?tipo=cerrarSesion");
+		
+	}
+
+%> 
 
     <jsp:include page="WEB-INF/head.jsp">
     	<jsp:param  name="title" value="Producto"/>

@@ -12,7 +12,13 @@ if(email!=''& contra!=''){
 			if(datos!=''){	
 				enviarUsuarioServlet(JSON.stringify(datos));
 			}
-			else
+			else{
+				$.ambiance({
+				       message: 'Email y/o contraseña incorrectos.',
+				       title: "ERROR! ",
+				       type: "error"
+				    });
+			}
 				console.log('CONTRASEÑA INCORRECTA');
 		},error: function(result){
                     console.log('ERROR ' + result.status + ' ' + result.statusText);
